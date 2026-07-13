@@ -1,11 +1,11 @@
 [
   {
     "id": "DIJKSTRA_MELLE_MRI_HOMBRO",
-    "name": "DIJKSTRA MELLE MRI HOMBRO",
+    "name": "DIJKSTRA_MELLE_MRI_HOMBRO",
     "series": [
       {
         "id": "Series_1_PDW_TSE_SPAIR_Tra_smsh_recon",
-        "name": "PDW TSE SPAIR Axial (TRA) SMSH RECON [Series 1]",
+        "name": "Series_1_PDW_TSE_SPAIR_Tra_smsh_recon",
         "filesCount": 24,
         "files": [
           "Instance_0001_1.2.410.200095.1.3.9443124.2.9.1.20260529221722.1095841265.1.dcm.enc",
@@ -36,7 +36,7 @@
       },
       {
         "id": "Series_2_T1W_TSE_Cor_smsh_recon",
-        "name": "T1W TSE Coronal (COR) SMSH RECON [Series 2]",
+        "name": "Series_2_T1W_TSE_Cor_smsh_recon",
         "filesCount": 20,
         "files": [
           "Instance_0001_1.2.410.200095.1.3.9443124.2.9.1.20260529221917.2117654410.1.dcm.enc",
@@ -63,7 +63,7 @@
       },
       {
         "id": "Series_3_PDW_TSE_SPAIR_Cor_smsh_recon",
-        "name": "PDW TSE SPAIR Coronal (COR) SMSH RECON [Series 3]",
+        "name": "Series_3_PDW_TSE_SPAIR_Cor_smsh_recon",
         "filesCount": 20,
         "files": [
           "Instance_0001_1.2.410.200095.1.3.9443124.2.9.1.20260529222030.3657364207.1.dcm.enc",
@@ -90,7 +90,7 @@
       },
       {
         "id": "Series_4_PDW_TSE_SPAIR_Sag_smsh_recon",
-        "name": "PDW TSE SPAIR Sagittal (SAG) SMSH RECON [Series 4]",
+        "name": "Series_4_PDW_TSE_SPAIR_Sag_smsh_recon",
         "filesCount": 20,
         "files": [
           "Instance_0001_1.2.410.200095.1.3.9443124.2.9.1.20260529222213.740365882.1.dcm.enc",
@@ -117,7 +117,7 @@
       },
       {
         "id": "Series_5_No_Description",
-        "name": "NO DESCRIPTION [Series 5]",
+        "name": "Series_5_No_Description",
         "filesCount": 6,
         "files": [
           "Instance_0001_1.2.840.114356.2026.15.11.110.110.19.1493.2.dcm.enc",
@@ -130,7 +130,7 @@
       },
       {
         "id": "Series_6_SURVEY_FullFOV_Transversal",
-        "name": "SURVEY FULLFOV TRANSVERSAL [Series 6]",
+        "name": "Series_6_SURVEY_FullFOV_Transversal",
         "filesCount": 10,
         "files": [
           "Instance_0001_1.3.46.670589.11.10716.5.0.8372.2026052922160395233.dcm.enc",
@@ -147,7 +147,7 @@
       },
       {
         "id": "Series_7_SURVEY_RIGHT",
-        "name": "SURVEY RIGHT [Series 7]",
+        "name": "Series_7_SURVEY_RIGHT",
         "filesCount": 15,
         "files": [
           "Instance_0001_1.3.46.670589.11.10716.5.0.8372.2026052922171123251.dcm.enc",
@@ -171,11 +171,11 @@
   },
   {
     "id": "DIJKSTRA_MELLE_MRI_RODILLA",
-    "name": "DIJKSTRA MELLE MRI RODILLA",
+    "name": "DIJKSTRA_MELLE_MRI_RODILLA",
     "series": [
       {
         "id": "Series_1_Patient_Aligned_MPR_AWPLAN_SMARTPLAN_TYPE_KNEE",
-        "name": "PATIENT ALIGNED MPR AWPLAN SMARTPLAN TYPE KNEE [Series 1]",
+        "name": "Series_1_Patient_Aligned_MPR_AWPLAN_SMARTPLAN_TYPE_KNEE",
         "filesCount": 99,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.6364.2026063020383300001.dcm.enc",
@@ -281,7 +281,7 @@
       },
       {
         "id": "Series_2_SmartKnee_IZQUIERDA",
-        "name": "IZQUIERDA [Series 2]",
+        "name": "Series_2_SmartKnee_IZQUIERDA",
         "filesCount": 200,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020382944893.dcm.enc",
@@ -488,7 +488,7 @@
       },
       {
         "id": "Series_3_MPR_-_SmartKnee",
-        "name": "MPR - [Series 3]",
+        "name": "Series_3_MPR_-_SmartKnee",
         "filesCount": 2,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020382977993.dcm.enc",
@@ -497,7 +497,7 @@
       },
       {
         "id": "Series_4_PD_FS_TRA_smkn",
-        "name": "PD FS Axial (TRA) [Series 4]",
+        "name": "Series_4_PD_FS_TRA_smkn",
         "filesCount": 28,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020400450998.dcm.enc",
@@ -532,7 +532,7 @@
       },
       {
         "id": "Series_5_PD_FS_COR__smkn",
-        "name": "PD FS Coronal (COR) [Series 5]",
+        "name": "Series_5_PD_FS_COR__smkn",
         "filesCount": 32,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020423660028.dcm.enc",
@@ -571,7 +571,7 @@
       },
       {
         "id": "Series_6_T1_SAG_smkn",
-        "name": "T1 Sagittal (SAG) [Series 6]",
+        "name": "Series_6_T1_SAG_smkn",
         "filesCount": 30,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020444787078.dcm.enc",
@@ -608,7 +608,7 @@
       },
       {
         "id": "Series_7_PD_FS_SAG_smkn",
-        "name": "PD FS Sagittal (SAG) [Series 7]",
+        "name": "Series_7_PD_FS_SAG_smkn",
         "filesCount": 30,
         "files": [
           "Instance_0001_1.3.46.670589.11.41191.5.0.8148.2026063020455772095.dcm.enc",

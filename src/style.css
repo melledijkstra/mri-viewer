@@ -303,6 +303,7 @@ body {
   position: relative;
   overflow: auto;
   flex-shrink: 0;
+  word-wrap: break-word;
 }
 
 .series-card:hover {

@@ -54,7 +54,7 @@ function generateIndex() {
     const scanPath = path.join(SCANS_DIR, scanDir);
     const scanObj = {
       id: scanDir,
-      name: formatScanName(scanDir),
+      name: scanDir, // formatScanName(scanDir),
       series: []
     };
 
@@ -86,7 +86,7 @@ function generateIndex() {
       if (files.length > 0) {
         scanObj.series.push({
           id: seriesDir,
-          name: formatSeriesName(seriesDir),
+          name: seriesDir, // formatSeriesName(seriesDir),
           filesCount: files.length,
           files: files // Store list of files relative to the series directory
         });

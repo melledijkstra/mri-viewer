@@ -6,8 +6,8 @@
   "scripts": {
     "encrypt-scans": "node scripts/encrypt-scans.js",
     "generate-index": "node scripts/generate-scan-index.js",
-    "predev": "npm run encrypt-scans && npm run generate-index",
-    "prebuild": "npm run encrypt-scans && npm run generate-index",
+    "prepare-scans": "npm run encrypt-scans && npm run generate-index",
+    "prebuild": "npm run prepare-scans",
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",

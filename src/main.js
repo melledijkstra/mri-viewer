@@ -166,13 +166,17 @@ async function loadExams() {
       throw new Error('No scans found in scans.json index.');
     }
     
-    // Find the first series of the first scan to verify the passcode
-    const firstScan = scansData[0];
-    const firstSeries = firstScan.series[0];
-    const firstFilename = firstSeries.files[0];
+    // Resolve the target scan and series from URL parameters (or default to the first scan/series)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlExamId = urlParams.get('exam');
+    const urlSeriesId = urlParams.get('series');
     
-    // Attempt to fetch and decrypt this single file as validation
-    const testUrl = new URL(`scans/${firstScan.id}/${firstSeries.id}/${firstFilename}`, window.location.href).href;
+    const targetScan = scansData.find(s => s.id === urlExamId) || scansData[0];
+    const targetSeries = targetScan.series.find(s => s.id === urlSeriesId) || targetScan.series[0];
+    const targetFilename = targetSeries.files[0];
+    
+    // Attempt to fetch and decrypt this target file as validation
+    const testUrl = new URL(`scans/${targetScan.id}/${targetSeries.id}/${targetFilename}`, window.location.href).href;
     await fetchAndDecrypt(testUrl);
     
     // Decryption succeeded! Dismiss password dialog
@@ -180,8 +184,9 @@ async function loadExams() {
     hideLoading();
     
     populateExamsSelector();
-    // Select first exam by default
-    selectExam(firstScan.id);
+    
+    // Select the correct exam, series, and slice based on URL parameters
+    selectExamFromUrl();
   } catch (error) {
     console.error('Decryption test failed:', error);
     // Decryption failed (probably wrong password)
@@ -219,6 +224,57 @@ function populateExamsSelector() {
   });
 }
 
+// Dynamically update search parameters in the browser's address bar
+function updateUrlParams() {
+  if (!activeScan || !activeSeries) return;
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set('exam', activeScan.id);
+    url.searchParams.set('series', activeSeries.id);
+    url.searchParams.set('slice', activeSliceIndex + 1); // 1-based index for readability
+    window.history.replaceState({}, '', url.toString());
+  } catch (e) {
+    console.error('Failed to update URL parameters:', e);
+  }
+}
+
+// Read URL parameters on startup to load specific patient scans, series, and slices
+function selectExamFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlExamId = urlParams.get('exam');
+  const urlSeriesId = urlParams.get('series');
+  const urlSliceParam = urlParams.get('slice');
+  
+  const scan = scansData.find(s => s.id === urlExamId) || scansData[0];
+  
+  // Set dropdown value
+  scanSelect.value = scan.id;
+  activeScan = scan;
+  
+  // Populates series list
+  populateSeriesSidebar();
+  
+  const series = scan.series.find(s => s.id === urlSeriesId) || scan.series[0];
+  
+  // Parse slice coordinate
+  let sliceIndex = 0;
+  if (urlSliceParam) {
+    const parsedSlice = parseInt(urlSliceParam, 10);
+    if (!isNaN(parsedSlice) && parsedSlice >= 1 && parsedSlice <= series.filesCount) {
+      sliceIndex = parsedSlice - 1;
+    }
+  }
+  
+  // Cache the slice coordinate in the persistent cache so selectSeries automatically selects it
+  if (!savedViewports[series.id]) {
+    savedViewports[series.id] = { sliceIndex: sliceIndex };
+  } else {
+    savedViewports[series.id].sliceIndex = sliceIndex;
+  }
+  
+  selectSeries(series.id);
+}
+
 function selectExam(scanId) {
   activeScan = scansData.find(s => s.id === scanId);
   if (!activeScan) return;
@@ -230,6 +286,8 @@ function selectExam(scanId) {
   if (activeScan.series && activeScan.series.length > 0) {
     selectSeries(activeScan.series[0].id);
   }
+  
+  updateUrlParams();
 }
 
 function populateSeriesSidebar() {
@@ -301,6 +359,9 @@ async function selectSeries(seriesId) {
   // Load and display slice
   await displaySlice(activeSliceIndex);
   hideLoading();
+  
+  // Update URL parameters
+  updateUrlParams();
   
   // Preload adjacent slices in background to ensure lightning fast scrolling
   preloadSlices();
@@ -397,7 +458,7 @@ async function displaySlice(index) {
     // Apply saved viewport settings if they exist for this series,
     // or preserve the current viewport settings if scrolling within the same series
     const saved = savedViewports[activeSeries.id];
-    if (saved) {
+    if (saved && saved.scale !== undefined && saved.translation !== undefined && saved.voi !== undefined) {
       const viewport = cornerstone.getViewport(viewportElement);
       viewport.scale = saved.scale;
       viewport.translation.x = saved.translation.x;
@@ -428,6 +489,9 @@ async function displaySlice(index) {
     if (savedViewports[activeSeries.id]) {
       savedViewports[activeSeries.id].sliceIndex = index;
     }
+    
+    // Update URL query parameters dynamically
+    updateUrlParams();
     
     // Update HUD overlays
     updateHUD(image);
